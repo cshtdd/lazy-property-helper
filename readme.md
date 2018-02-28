@@ -20,7 +20,8 @@ dotnet test
 
 ```bash
 PROJECT_FILE=LazyPropertyHelper/LazyPropertyHelper.csproj && \
-  dotnet clean $PROJECT_FILE && \
+  rm LazyPropertyHelper/bin/Release/*.nupkg && \
+  dotnet clean $PROJECT_FILE -c Release && \
   dotnet build $PROJECT_FILE -c Release && \
   dotnet pack $PROJECT_FILE -c Release
 ```
