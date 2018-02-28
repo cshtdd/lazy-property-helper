@@ -24,5 +24,19 @@ namespace LazyPropertyHelperTests
 
       ExpensiveObject.InstancesCount.Should().BeGreaterThan(beforeInstancesCount);
     }
+    
+    [Fact]
+    public void LazyPropertyIsInitializedOnlyOnce()
+    {
+      var beforeInstancesCount = ExpensiveObject.InstancesCount;
+
+      var service = new SampleService();
+      
+      service.DoWork(1);
+      service.DoWork(1);
+      service.DoWork(1);
+
+      ExpensiveObject.InstancesCount.Should().Be(beforeInstancesCount + 1);
+    }
   }
 }

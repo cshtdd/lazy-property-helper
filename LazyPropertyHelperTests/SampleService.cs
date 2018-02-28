@@ -9,7 +9,18 @@ namespace LazyPropertyHelperTests
 
     public readonly string Id = Guid.NewGuid().ToString("N");
 
-    public ExpensiveObject ExpensiveLoad => new ExpensiveObject();
+    private ExpensiveObject _expensiveLoad;
+    public ExpensiveObject ExpensiveLoad {
+      get
+      {
+        if (_expensiveLoad == null)
+        {
+          _expensiveLoad = new ExpensiveObject();
+        }
+
+        return _expensiveLoad;
+      }
+    }
       
     public void DoWork(int n)
     {
