@@ -1,5 +1,9 @@
 # Lazy Property Helper Nuget  
 
+# Usage  
+
+Follow the steps from the [Nuget Package Url](https://www.nuget.org/packages/LazyPropertyHelper/)  
+
 # Development  
 
 ## Nuget Publish  
