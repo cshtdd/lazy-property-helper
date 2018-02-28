@@ -22,7 +22,7 @@ namespace LazyPropertyHelperTests
 
       new SampleService().DoWork(1);
 
-      ExpensiveObject.InstancesCount.Should().BeGreaterThan(beforeInstancesCount);
+      ExpensiveObject.InstancesCount.Should().Be(beforeInstancesCount + 1);
     }
     
     [Fact]
