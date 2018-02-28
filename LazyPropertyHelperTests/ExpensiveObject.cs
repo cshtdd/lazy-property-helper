@@ -2,9 +2,11 @@ namespace LazyPropertyHelperTests
 {
   public class ExpensiveObject
   {
-    public static volatile int InstancesCount;
- 
-    public ExpensiveObject() => InstancesCount++;
+    private static volatile int _instancesCount;
+
+    public static int InstancesCount => _instancesCount;
+
+    public ExpensiveObject() => _instancesCount++;
 
     public void Move(int source, int dest){}
   }
