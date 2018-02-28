@@ -26,6 +26,30 @@ namespace LazyPropertyHelperTests
     }
     
     [Fact]
+    public void LazyPropertyIsInitializedWhenRead()
+    {
+      var beforeInstancesCount = ExpensiveObject.InstancesCount;
+
+      var load = new SampleService().ExpensiveLoad;
+
+      ExpensiveObject.InstancesCount.Should().Be(beforeInstancesCount + 1);
+    }
+    
+    [Fact]
+    public void LazyPropertyIsInitializedWhenReadOnlyOnce()
+    {
+      var beforeInstancesCount = ExpensiveObject.InstancesCount;
+
+      var service = new SampleService();
+
+      var load1 = service.ExpensiveLoad;
+      var load2 = service.ExpensiveLoad;
+      var load3 = service.ExpensiveLoad;
+
+      ExpensiveObject.InstancesCount.Should().Be(beforeInstancesCount + 1);
+    }
+    
+    [Fact]
     public void LazyPropertyIsInitializedOnlyOnce()
     {
       var beforeInstancesCount = ExpensiveObject.InstancesCount;
