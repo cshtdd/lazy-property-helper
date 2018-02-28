@@ -6,6 +6,12 @@ Follow the steps from the [Nuget Package Url](https://www.nuget.org/packages/Laz
 
 # Development  
 
+## Run the test  
+
+```bash
+dotnet test
+```
+
 ## Nuget Publish  
 
 [Docs](https://docs.microsoft.com/en-us/nuget/quickstart/create-and-publish-a-package-using-visual-studio)  
