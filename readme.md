@@ -26,3 +26,5 @@ dotnet nuget push LazyPropertyHelper/bin/Release/LazyPropertyHelper.*.nupkg \
   -k `sudo security find-generic-password -w -gs NUGET_PUSH_KEY` \
   -s https://api.nuget.org/v3/index.json
 ```
+
+*The above command assumes there's a `NUGET_PUSH_KEY` stored in the Keychain*  
