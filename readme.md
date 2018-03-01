@@ -14,8 +14,9 @@ public class SampleService
 }
 ```
 
-`SampleService` depends on `ExpensiveObject` to do some work. The creation of `ExpensiveObject` is a computational intensive task. The `ExpensiveLoad` property will return a `new ExpensiveObject` when read the first time. Not only that it will cache this result in a thread-safe and efficient manner.  
-
+`SampleService` depends on `ExpensiveObject` to do some work.  
+The creation of a `ExpensiveObject` is a computational intensive task.  
+The `SampleService`'s `ExpensiveLoad` property will return a `new ExpensiveObject` when read the first time. Moreover, It will cache this result in a thread-safe and efficient manner.  
 
 ## Installation  
 
