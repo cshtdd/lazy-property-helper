@@ -22,3 +22,34 @@ The `SampleService`'s `ExpensiveLoad` property will return a `new ExpensiveObjec
 
 Follow the steps from the [Nuget Package Url](https://www.nuget.org/packages/LazyPropertyHelper/)  
 
+## FAQ  
+
+### Who needs this?  
+
+Developers that have written code similar to this one  
+
+```csharp
+public class MyServiceNaive
+{
+  private ExpensiveObject expensiveLoad;
+
+  public ExpensiveObject ExpensiveLoad
+  {
+    get
+    {
+      if (expensiveLoad == null)
+      {
+        expensiveLoad = new ExpensiveObject();
+      }
+
+      return expensiveLoad;
+    }
+  }
+
+  //more code
+}
+```
+
+The `ExpensiveLoad` property is not thread-safe. That code can be subject to weird race conditions when more than one `ExpensiveObject` are created.  
+
+
