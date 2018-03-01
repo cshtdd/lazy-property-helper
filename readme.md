@@ -95,3 +95,8 @@ I did not invented this pattern. I was inspired by a similar implementation from
 [`Lazy<T>`](https://msdn.microsoft.com/en-us/library/dd642331(v=vs.110).aspx) solves many of the problems around lazy initialization. You could even argue how much richer it is.  
 However, `Lazy<T>` adopts an all or nothing approach to locking. It can be configured to never lock or to always lock. These extremes can be highly inefficient or dangerous in certain situations.  
 `LazyPropertyHelper` takes a simpler approach with no compromises on thread-safety and performance.  
+
+### Will it create memory leaks?  
+
+No. There are [several unit tests to cover the destruction of the cached objects](https://github.com/camilin87/lazy-property-helper/blob/master/LazyPropertyHelperTests/DestructionTest.cs).  
+The result or the expensive computation can be explicitly disposed from the `Dispose` method of the class with the lazy property.  
