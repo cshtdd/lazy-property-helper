@@ -6,8 +6,10 @@ namespace LazyPropertyHelperTests
   public class LazyPropertyHelperTest
   {
     private readonly int beforeInstancesCount = ExpensiveObject.InstancesCount;
+    private readonly int beforeDestroyedCount = ExpensiveObject.DestroyedCount;
 
     private int CreatedInstances => ExpensiveObject.InstancesCount - beforeInstancesCount;
+    private int DestroyedInstances => ExpensiveObject.DestroyedCount - beforeDestroyedCount;
     
     [Fact]
     public void LazyPropertyIsNotInitializedOnConstruction()
