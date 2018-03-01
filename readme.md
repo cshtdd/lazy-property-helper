@@ -85,3 +85,9 @@ public class MyLockedService
 
 `LazyPropertyHelper` leverages the advantages of lambdas and functional programming to cache the result of an expensive computation. The computation is executed only once in a thread-safe context. Subsequent reads to the result don't require a lock.  
 [Here's the code](https://github.com/camilin87/lazy-property-helper/blob/master/LazyPropertyHelper/LazyProperty.cs) where all of this takes place. The important piece is the `CalculateAndCacheExpensiveComputation` method that replaces the `_expensiveComputationReader` with a lambda that always return the cached value stored in the `_cachedResult` field.  
+
+### How did you came up with this?  
+
+I did not invented this pattern. I was inspired by a similar implementation from [this great book about functional programming in Java](https://www.tddapps.com/2018/02/27/functional-programming-in-java/).  
+
+
