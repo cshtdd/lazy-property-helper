@@ -22,11 +22,19 @@ The `SampleService`'s `ExpensiveLoad` property will return a `new ExpensiveObjec
 
 Follow the steps from the [Nuget Package Url](https://www.nuget.org/packages/LazyPropertyHelper/).  
 
+## Dependencies  
+
+None  
+
 ## FAQ  
 
 ### Can this be used in dotnet core?  
 
 Yes. [Here's a sample project that uses](https://github.com/camilin87/ThreadSafeEfficientLazyProperty).  
+
+### Can this be used in .NET 4.6, .NET 4.7, etc?  
+
+Yes.  
 
 ### Who needs this?  
 
