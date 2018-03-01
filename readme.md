@@ -80,3 +80,8 @@ public class MyLockedService
   }
 }
 ```
+
+### How does it work?  
+
+`LazyPropertyHelper` leverages the advantages of lambdas and functional programming to cache the result of an expensive computation. The computation is executed only once in a thread-safe context. Subsequent reads to the result don't require a lock.  
+[Here's the code](https://github.com/camilin87/lazy-property-helper/blob/master/LazyPropertyHelper/LazyProperty.cs) where all of this takes place. The important piece is the `CalculateAndCacheExpensiveComputation` method that replaces the `_expensiveComputationReader` with a lambda that always return the cached value stored in the `_cachedResult` field.  
