@@ -20,7 +20,7 @@ The `SampleService`'s `ExpensiveLoad` property will return a `new ExpensiveObjec
 
 ## Installation  
 
-Follow the steps from the [Nuget Package Url](https://www.nuget.org/packages/LazyPropertyHelper/).  
+Follow the steps from the [`LazyPropertyHelper` Nuget Package](https://www.nuget.org/packages/LazyPropertyHelper/).  
 
 ## Dependencies  
 
@@ -42,7 +42,7 @@ Yes.
 
 ### Who needs this?  
 
-Developers that have written code similar to this one  
+Developers that have written code similar to this one:  
 
 ```csharp
 public class MyServiceNaive
@@ -66,11 +66,11 @@ public class MyServiceNaive
 }
 ```
 
-The `ExpensiveLoad` property is not thread-safe. That code can be subject to weird race conditions when more than one `ExpensiveObject` are created.  
+The `ExpensiveLoad` property is not thread-safe. It can be subject to weird race conditions.  
 
 ### Why is this better than `lock`?  
 
-The following code is thread-safe. However, it is inefficient because it needs to acquire a lock whenever `ExpensiveLoad` is read.  
+The following code is thread-safe. However, it is inefficient because it acquires a lock whenever `ExpensiveLoad` is read.  
 The `LazyPropertyHelper` nuget prevents unnecessary locks.  
 
 ```csharp
@@ -100,8 +100,8 @@ public class MyLockedService
 
 ### How does it work?  
 
-`LazyPropertyHelper` leverages the advantages of lambdas and functional programming to cache the result of an expensive computation. The computation is executed only once in a thread-safe context. Subsequent reads to the result don't require a lock.  
-[Here's the code](https://github.com/camilin87/lazy-property-helper/blob/master/LazyPropertyHelper/LazyProperty.cs) where all of this takes place. The important piece is the `CalculateAndCacheExpensiveComputation` method that replaces the `_expensiveComputationReader` with a lambda that always return the cached value stored in the `_cachedResult` field.  
+`LazyPropertyHelper` leverages the advantages of lambdas and functional programming to cache the result of an expensive computation. The computation is executed only once in a thread-safe context. Subsequent reads don't require a lock.  
+[Here's the code](https://github.com/camilin87/lazy-property-helper/blob/master/LazyPropertyHelper/LazyProperty.cs) where all of this takes place. The important piece is the `CalculateAndCacheExpensiveComputation` method that replaces the `_expensiveComputationReader` with a lambda that always return the cached value from the `_cachedResult` field.  
 
 ### How do you know it works?  
 
@@ -123,4 +123,4 @@ However, `Lazy<T>` adopts an all or nothing approach to locking. It can be confi
 ### Will it create memory leaks?  
 
 No. There are [several unit tests to cover the destruction of the cached objects](https://github.com/camilin87/lazy-property-helper/blob/master/LazyPropertyHelperTests/DestructionTest.cs).  
-The result or the expensive computation can be explicitly disposed from the `Dispose` method of the class with the lazy property.  
+The result of the expensive computation can be explicitly disposed from the `Dispose` method of the class with the lazy property.  
