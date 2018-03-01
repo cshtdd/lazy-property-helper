@@ -1,3 +1,4 @@
+using System;
 using FluentAssertions;
 using Xunit;
 
@@ -5,18 +6,25 @@ namespace LazyPropertyHelperTests
 {
   public class LazyPropertyHelperTest
   {
-    private readonly int beforeInstancesCount = ExpensiveObject.InstancesCount;
-    private readonly int beforeDestroyedCount = ExpensiveObject.DestroyedCount;
+    private readonly int beforeExpensiveInstancesCreatedCount = ExpensiveObject.CreatedCount;
+    private readonly int beforeExpensiveInstancesDestroyedCount = ExpensiveObject.DestroyedCount;
 
-    private int CreatedInstances => ExpensiveObject.InstancesCount - beforeInstancesCount;
-    private int DestroyedInstances => ExpensiveObject.DestroyedCount - beforeDestroyedCount;
+    private readonly int beforeServiceInstancesCreatedCount = SampleService.CreatedCount;
+    private readonly int beforeServiceInstancesDestroyedCount = SampleService.DestroyedCount;
+    
+    private int ExpensiveInstancesCreated => ExpensiveObject.CreatedCount - beforeExpensiveInstancesCreatedCount;
+    private int ExpensiveInstancesDestroyed => ExpensiveObject.DestroyedCount - beforeExpensiveInstancesDestroyedCount;
+    
+    private int ServiceInstancesCreated => SampleService.CreatedCount - beforeServiceInstancesCreatedCount;
+    private int ServiceInstancesDestroyed => SampleService.DestroyedCount - beforeServiceInstancesDestroyedCount;
     
     [Fact]
     public void LazyPropertyIsNotInitializedOnConstruction()
     {
       new SampleService();
 
-      CreatedInstances.Should().Be(0);
+      ServiceInstancesCreated.Should().Be(1);
+      ExpensiveInstancesCreated.Should().Be(0);
     }
     
     [Fact]
@@ -24,7 +32,8 @@ namespace LazyPropertyHelperTests
     {
       new SampleService().DoWork(1);
 
-      CreatedInstances.Should().Be(1);
+      ServiceInstancesCreated.Should().Be(1);
+      ExpensiveInstancesCreated.Should().Be(1);
     }
     
     [Fact]
@@ -32,7 +41,8 @@ namespace LazyPropertyHelperTests
     {
       var load = new SampleService().ExpensiveLoad;
 
-      CreatedInstances.Should().Be(1);
+      ServiceInstancesCreated.Should().Be(1);
+      ExpensiveInstancesCreated.Should().Be(1);
     }
     
     [Fact]
@@ -44,7 +54,8 @@ namespace LazyPropertyHelperTests
       var load2 = service.ExpensiveLoad;
       var load3 = service.ExpensiveLoad;
 
-      CreatedInstances.Should().Be(1);
+      ServiceInstancesCreated.Should().Be(1);
+      ExpensiveInstancesCreated.Should().Be(1);
     }
     
     [Fact]
@@ -56,7 +67,8 @@ namespace LazyPropertyHelperTests
       service.DoWork(1);
       service.DoWork(1);
 
-      CreatedInstances.Should().Be(1);
+      ServiceInstancesCreated.Should().Be(1);
+      ExpensiveInstancesCreated.Should().Be(1);
     }
 
     [Fact]
@@ -73,7 +85,8 @@ namespace LazyPropertyHelperTests
       service2.DoWork(1);
       service2.DoWork(1);
       
-      CreatedInstances.Should().Be(2);
+      ServiceInstancesCreated.Should().Be(2);
+      ExpensiveInstancesCreated.Should().Be(2);
     }
   }
 }
