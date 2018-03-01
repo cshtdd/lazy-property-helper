@@ -101,14 +101,14 @@ public class MyLockedService
 
 ### How do you know it works?  
 
-Testing concurrent code is hard _[citation needed]_. We didn't even try to simulate concurrency problems in unit tests.  
+Testing concurrent code is hard _[citation needed]_. We didn't even bother to simulate concurrency problems in unit tests.  
 However, we wrote dozens of unit tests to make sure that the `LazyPropertyHelper` behaves as expected.  
 
 [Take a look at the tests](https://github.com/camilin87/lazy-property-helper/tree/master/LazyPropertyHelperTests)  
 
 ### How did you come up with this?  
 
-I did not invented this pattern. I was inspired by a similar implementation from [this great book about functional programming in Java](https://www.tddapps.com/2018/02/27/functional-programming-in-java/).  
+I did not create this pattern. I was inspired by a similar implementation from [this great book about functional programming in Java](https://www.tddapps.com/2018/02/27/functional-programming-in-java/).  
 
 ### Isn't this the same as [`Lazy<T>`](https://msdn.microsoft.com/en-us/library/dd642331(v=vs.110).aspx)?  
 
