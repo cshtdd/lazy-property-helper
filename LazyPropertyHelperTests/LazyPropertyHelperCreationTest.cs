@@ -1,23 +1,16 @@
-using System;
 using FluentAssertions;
 using Xunit;
 
 namespace LazyPropertyHelperTests
 {
-  public class LazyPropertyHelperTest
+  public class LazyPropertyHelperCreationTest
   {
     private readonly int beforeExpensiveInstancesCreatedCount = ExpensiveObject.CreatedCount;
-    private readonly int beforeExpensiveInstancesDestroyedCount = ExpensiveObject.DestroyedCount;
-
-    private readonly int beforeServiceInstancesCreatedCount = SampleService.CreatedCount;
-    private readonly int beforeServiceInstancesDestroyedCount = SampleService.DestroyedCount;
-    
     private int ExpensiveInstancesCreated => ExpensiveObject.CreatedCount - beforeExpensiveInstancesCreatedCount;
-    private int ExpensiveInstancesDestroyed => ExpensiveObject.DestroyedCount - beforeExpensiveInstancesDestroyedCount;
     
+    private readonly int beforeServiceInstancesCreatedCount = SampleService.CreatedCount;
     private int ServiceInstancesCreated => SampleService.CreatedCount - beforeServiceInstancesCreatedCount;
-    private int ServiceInstancesDestroyed => SampleService.DestroyedCount - beforeServiceInstancesDestroyedCount;
-    
+
     [Fact]
     public void LazyPropertyIsNotInitializedOnConstruction()
     {
