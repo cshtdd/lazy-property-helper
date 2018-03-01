@@ -30,7 +30,7 @@ None
 
 ### Can this be used in dotnet core?  
 
-Yes. [Here's a sample project that uses](https://github.com/camilin87/ThreadSafeEfficientLazyProperty).  
+Yes. [Sample project](https://github.com/camilin87/ThreadSafeEfficientLazyProperty).  
 
 ### Can this be used in .NET 4.6, .NET 4.7, etc?  
 
