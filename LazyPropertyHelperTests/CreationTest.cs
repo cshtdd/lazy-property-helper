@@ -3,13 +3,13 @@ using Xunit;
 
 namespace LazyPropertyHelperTests
 {
-  public class LazyPropertyHelperCreationTest
+  public class CreationTest
   {
-    private readonly int beforeExpensiveInstancesCreatedCount = ExpensiveObject.CreatedCount;
-    private int ExpensiveInstancesCreated => ExpensiveObject.CreatedCount - beforeExpensiveInstancesCreatedCount;
+    private readonly int _beforeExpensiveInstancesCreatedCount = ExpensiveObject.CreatedCount;
+    private int ExpensiveInstancesCreated => ExpensiveObject.CreatedCount - _beforeExpensiveInstancesCreatedCount;
     
-    private readonly int beforeServiceInstancesCreatedCount = SampleService.CreatedCount;
-    private int ServiceInstancesCreated => SampleService.CreatedCount - beforeServiceInstancesCreatedCount;
+    private readonly int _beforeServiceInstancesCreatedCount = SampleService.CreatedCount;
+    private int ServiceInstancesCreated => SampleService.CreatedCount - _beforeServiceInstancesCreatedCount;
 
     [Fact]
     public void LazyPropertyIsNotInitializedOnConstruction()

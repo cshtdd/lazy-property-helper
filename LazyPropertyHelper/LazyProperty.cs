@@ -2,7 +2,7 @@
 
 namespace LazyPropertyHelper
 {
-    public static class LazyPropertyHelper
+    public static class LazyProperty
     {
         public static Func<T> Create<T>(Func<T> expensiveComputation) => new LazyPropertyHelperInternal<T>(expensiveComputation).Read;
 

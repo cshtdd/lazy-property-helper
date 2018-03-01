@@ -4,20 +4,20 @@ using Xunit;
 
 namespace LazyPropertyHelperTests
 {
-  public class LazyPropertyHelperDestructionTest
+  public class DestructionTest
   {
-    private readonly int beforeExpensiveInstancesDestroyedCount; 
-    private int ExpensiveInstancesDestroyed => ExpensiveObject.DestroyedCount - beforeExpensiveInstancesDestroyedCount;
+    private readonly int _beforeExpensiveInstancesDestroyedCount; 
+    private int ExpensiveInstancesDestroyed => ExpensiveObject.DestroyedCount - _beforeExpensiveInstancesDestroyedCount;
     
-    private readonly int beforeServiceInstancesDestroyedCount;
-    private int ServiceInstancesDestroyed => SampleService.DestroyedCount - beforeServiceInstancesDestroyedCount;  
+    private readonly int _beforeServiceInstancesDestroyedCount;
+    private int ServiceInstancesDestroyed => SampleService.DestroyedCount - _beforeServiceInstancesDestroyedCount;  
     
-    public LazyPropertyHelperDestructionTest()
+    public DestructionTest()
     {
       CleanupResources();
       
-      beforeExpensiveInstancesDestroyedCount = ExpensiveObject.DestroyedCount;
-      beforeServiceInstancesDestroyedCount = SampleService.DestroyedCount;
+      _beforeExpensiveInstancesDestroyedCount = ExpensiveObject.DestroyedCount;
+      _beforeServiceInstancesDestroyedCount = SampleService.DestroyedCount;
     }
     
     private void TestBody(Action callback)

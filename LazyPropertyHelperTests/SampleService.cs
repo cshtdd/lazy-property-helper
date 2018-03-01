@@ -1,4 +1,5 @@
 using System;
+using LazyPropertyHelper;
 
 namespace LazyPropertyHelperTests
 {
@@ -10,7 +11,7 @@ namespace LazyPropertyHelperTests
     public static int CreatedCount => _createdCount;
     public static int DestroyedCount => _destroyedCount;
     
-    private readonly Func<ExpensiveObject> _expensiveLoad = LazyPropertyHelper.LazyPropertyHelper.Create(() => new ExpensiveObject());
+    private readonly Func<ExpensiveObject> _expensiveLoad = LazyProperty.Create(() => new ExpensiveObject());
     public ExpensiveObject ExpensiveLoad => _expensiveLoad();
 
     public SampleService() => _createdCount++;

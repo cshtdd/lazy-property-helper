@@ -1,37 +1,23 @@
 # Lazy Property Helper Nuget  
 
-# Usage  
+Nuget package to implement the [Lazy Initialization pattern](https://en.wikipedia.org/wiki/Lazy_initialization) in a [thread-safe](https://en.wikipedia.org/wiki/Thread_safety) and efficient manner.  
+
+## Usage  
+
+```csharp
+public class SampleService
+{ 
+  private readonly Func<ExpensiveObject> _expensiveLoad = LazyProperty.Create(() => new ExpensiveObject());
+  public ExpensiveObject ExpensiveLoad => _expensiveLoad();
+
+  public void DoWork(int n) => ExpensiveLoad.Move(n*10 - 100, n*10 + 100);
+}
+```
+
+`SampleService` depends on `ExpensiveObject` to do some work. The creation of `ExpensiveObject` is a computational intensive task. The `ExpensiveLoad` property will return a `new ExpensiveObject` when read the first time. Not only that it will cache this result in a thread-safe and efficient manner.  
+
+
+## Installation  
 
 Follow the steps from the [Nuget Package Url](https://www.nuget.org/packages/LazyPropertyHelper/)  
 
-# Development  
-
-## Run the test  
-
-```bash
-dotnet test
-```
-
-## Nuget Publish  
-
-[Docs](https://docs.microsoft.com/en-us/nuget/quickstart/create-and-publish-a-package-using-visual-studio)  
-
-### Step 1: Package project  
-
-```bash
-PROJECT_FILE=LazyPropertyHelper/LazyPropertyHelper.csproj && \
-  rm LazyPropertyHelper/bin/Release/*.nupkg && \
-  dotnet clean $PROJECT_FILE -c Release && \
-  dotnet build $PROJECT_FILE -c Release && \
-  dotnet pack $PROJECT_FILE -c Release
-```
-
-### Step 2: Publish nuget  
-
-```bash
-dotnet nuget push LazyPropertyHelper/bin/Release/LazyPropertyHelper.*.nupkg \
-  -k `sudo security find-generic-password -w -gs NUGET_PUSH_KEY` \
-  -s https://api.nuget.org/v3/index.json
-```
-
-*The above command assumes there's a `NUGET_PUSH_KEY` stored in the Keychain*  
