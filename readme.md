@@ -26,6 +26,10 @@ Follow the steps from the [Nuget Package Url](https://www.nuget.org/packages/Laz
 
 None  
 
+## License  
+
+[MIT](https://github.com/angular/angular.js/blob/master/LICENSE)  
+
 ## FAQ  
 
 ### Can this be used in dotnet core?  
