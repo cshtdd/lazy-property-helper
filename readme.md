@@ -52,4 +52,31 @@ public class MyServiceNaive
 
 The `ExpensiveLoad` property is not thread-safe. That code can be subject to weird race conditions when more than one `ExpensiveObject` are created.  
 
+### Why is this better than `lock`?  
 
+The following code is thread-safe. However, it is very inefficient because it needs to acquire a lock whenever `ExpensiveLoad` is read. The `LazyProperty` from this nuget solves this problem.  
+
+```csharp
+public class MyLockedService
+{
+  private object criticalSection = new object();
+  
+  private ExpensiveObject expensiveLoad;
+
+  public ExpensiveObject ExpensiveLoad
+  {
+    get
+    {
+      lock (criticalSection)
+      {
+        if (expensiveLoad == null)
+        {
+          expensiveLoad = new ExpensiveObject();
+        }
+      }
+
+      return expensiveLoad;
+    }
+  }
+}
+```
